@@ -1,0 +1,15 @@
+object TConMinerva: TTConMinerva
+  OnCreate = DataModuleCreate
+  Height = 367
+  Width = 634
+  PixelsPerInch = 120
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'Database=minerva'
+      'User_Name=sa'
+      'Password=Minerva2024'
+      'DriverID=MSSQL')
+    Left = 64
+    Top = 32
+  end
+end

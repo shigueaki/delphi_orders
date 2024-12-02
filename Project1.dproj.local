@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2024/11/30 16:06:35.065,=C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/11/30 16:07:32.010,C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\TMain.pas=C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/11/30 16:07:32.010,C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\TMain.dfm=C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/11/30 16:10:01.922,C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\Minerva Orders\TMain.dfm=C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\TMain.dfm</Transaction>
+    <Transaction>2024/11/30 16:10:01.922,C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\Minerva Orders\TMain.pas=C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\TMain.pas</Transaction>
+    <Transaction>2024/11/30 16:10:05.394,C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\Minerva Orders\Project1.dproj=C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

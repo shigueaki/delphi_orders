@@ -1,0 +1,11 @@
+object DataModule1: TDataModule1
+  Height = 300
+  Width = 316
+  PixelsPerInch = 120
+  object tbClients: TFDTable
+    Connection = TConMinerva.FDConnection1
+    TableName = 'tb_clients'
+    Left = 56
+    Top = 32
+  end
+end
