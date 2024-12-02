@@ -1,0 +1,14 @@
+object DataModule2: TDataModule2
+  Height = 340
+  Width = 518
+  PixelsPerInch = 120
+  object tbProduct: TFDTable
+    Connection = TConMinerva.FDConnection1
+    Left = 104
+    Top = 120
+  end
+  object dsProduct: TDataSource
+    Left = 288
+    Top = 120
+  end
+end

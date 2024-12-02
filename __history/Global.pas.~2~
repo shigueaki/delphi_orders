@@ -1,0 +1,11 @@
+unit Global;
+
+interface
+
+var
+  const DBConnection : string;
+
+
+implementation
+
+end.

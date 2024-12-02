@@ -10,7 +10,7 @@ uses
   unitProducts in 'unitProducts.pas' {formProducts},
   ConMinerva in 'ConMinerva.pas' {TConMinerva: TDataModule},
   unitDMClients in 'unitDMClients.pas' {DMclients: TDataModule},
-  DMProducts in 'DMProducts.pas' {DataModule2: TDataModule},
+  unitDMProducts in 'unitDMProducts.pas' {DMProducts: TDataModule},
   Global in 'Global.pas';
 
 {$R *.res}
@@ -26,6 +26,6 @@ begin
   Application.CreateForm(TformProducts, formProducts);
   Application.CreateForm(TTConMinerva, TConMinerva);
   Application.CreateForm(TDMclients, DMclients);
-  Application.CreateForm(TDataModule2, DataModule2);
+  Application.CreateForm(TDMProducts, DMProducts);
   Application.Run;
 end.

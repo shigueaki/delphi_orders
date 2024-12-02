@@ -1,0 +1,34 @@
+unit unitProducts;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.Mask, Vcl.ExtCtrls, Vcl.DBCtrls;
+
+type
+  TformProducts = class(TForm)
+    DBGrid1: TDBGrid;
+    DBEdit1: TDBEdit;
+    Label1: TLabel;
+    DBEdit2: TDBEdit;
+    Label2: TLabel;
+    DBMemo1: TDBMemo;
+    Label3: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  formProducts: TformProducts;
+
+implementation
+
+{$R *.dfm}
+
+uses unitDMProducts;
+
+end.

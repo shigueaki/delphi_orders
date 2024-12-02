@@ -160,8 +160,8 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="DMProducts.pas">
-            <Form>DataModule2</Form>
+        <DCCReference Include="unitDMProducts.pas">
+            <Form>DMProducts</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
