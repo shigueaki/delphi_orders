@@ -29,3 +29,5 @@ This project is an educational exercise developed using Delphi 12, SQL Server, F
         Prefix: unit
         Follows PascalCase format.
         Example: unitOrders, unitClients.
+
+The Diagram of entity and relationship from SQL Server is on DER.png, and all scripts to create and populate databases is on SQLQuery1.sql file.
