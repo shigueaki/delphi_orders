@@ -26,6 +26,8 @@ type
     edtSearchClient: TEdit;
     dbgRegisteredClients: TDBGrid;
     btnSave: TButton;
+    memItensvalue: TCurrencyField;
+    memItenstotal: TCurrencyField;
     procedure edtProductKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edtProductEnter(Sender: TObject);
@@ -54,7 +56,7 @@ implementation
 
 {$R *.dfm}
 
-uses unitDMOrders, unitDMProducts, unitDMClients;
+uses unitDMOrders, unitDMProducts, unitDMClients, ConMinerva;
 
 procedure TformOrders.edtProductEnter(Sender: TObject);
 begin
@@ -107,21 +109,21 @@ begin
     if TryStrToInt(edtProduct.Text, IdProduct) then
     begin
       SQL := SQL + 'WHERE id = :id';
-      DMOrders.qSearchProducts.SQL.Text := SQL;
-      DMOrders.qSearchProducts.ParamByName('id').AsInteger := IdProduct;
+      DMOrders.qProducts.SQL.Text := SQL;
+      DMOrders.qProducts.ParamByName('id').AsInteger := IdProduct;
     end
     else
     begin
       SQL := SQL + 'WHERE UPPER(NAME) LIKE ' + QuotedStr('%') + ' + UPPER(:name) + ' + QuotedStr('%');
-      DMOrders.qSearchProducts.SQL.Text := SQL;
-      DMOrders.qSearchProducts.ParamByName('name').AsString := edtProduct.Text;
+      DMOrders.qProducts.SQL.Text := SQL;
+      DMOrders.qProducts.ParamByName('name').AsString := edtProduct.Text;
     end;
 
-    DMOrders.qSearchProducts.Open;
+    DMOrders.qProducts.Open;
 
-    if not DMOrders.qSearchProducts.IsEmpty then
+    if not DMOrders.qProducts.IsEmpty then
     begin
-      edtProduct.Text := DMOrders.qSearchProducts.FieldByName('id').AsString + ' - ' + DMOrders.qSearchProducts.FieldByName('name').AsString;
+      edtProduct.Text := DMOrders.qProducts.FieldByName('id').AsString + ' - ' + DMOrders.qProducts.FieldByName('name').AsString;
 
       if edtQuantity.CanFocus then
       begin
@@ -137,9 +139,9 @@ var
   Quantity : Integer;
   QuantityFractionate : double;
 begin
-  if (edtQuantity.Text <> '') and not DMOrders.qSearchProducts.IsEmpty then
+  if (edtQuantity.Text <> '') and not DMOrders.qProducts.IsEmpty then
   begin
-    if not DMOrders.qSearchProducts.FieldByName('allowfractionate').AsBoolean then
+    if not DMOrders.qProducts.FieldByName('allowfractionate').AsBoolean then
     begin
       if TryStrToInt(edtQuantity.Text, Quantity) then
         InsertItem(Quantity);
@@ -163,9 +165,11 @@ begin
     dsItens.DataSet.Open;
 
   dsItens.DataSet.Append;
-  dsItens.DataSet.FieldByName('id').AsInteger := DMOrders.qSearchProducts.FieldByName('id').AsInteger;
-  dsItens.DataSet.FieldByName('name').AsString := DMOrders.qSearchProducts.FieldByName('name').AsString;
+  dsItens.DataSet.FieldByName('id').AsInteger := DMOrders.qProducts.FieldByName('id').AsInteger;
+  dsItens.DataSet.FieldByName('name').AsString := DMOrders.qProducts.FieldByName('name').AsString;
+  dsItens.DataSet.FieldByName('value').AsCurrency := DMOrders.qProducts.FieldByName('price').AsCurrency;
   dsItens.DataSet.FieldByName('quantity').AsFloat := Quantity;
+  dsItens.DataSet.FieldByName('total').AsCurrency := DMOrders.qProducts.FieldByName('price').AsCurrency * Quantity;
   dsItens.DataSet.Post;
 end;
 procedure TformOrders.btnAddItemClick(Sender: TObject);
@@ -184,33 +188,83 @@ end;
 procedure TformOrders.btnSaveClick(Sender: TObject);
 var
   QuestionAnswer : Integer;
+  OrderTotal : double;
+  IdOrder : Integer;
+  SQL : string;
 begin
-  if not dsItens.DataSet.IsEmpty and
-    not DMClients.dsClients.DataSet.IsEmpty then
-  begin
-    MessageDlg('You want to finalize the sale now?', mtConfirmation, [mbYes, mbNo], 0);
-    if not QuestionAnswer = mrYes then
-      Exit;
-
-    dsItens.DataSet.First;
-    while not dsItens.DataSet.Eof do
+  try
+    if not dsItens.DataSet.IsEmpty and
+      not DMClients.dsClients.DataSet.IsEmpty then
     begin
-      ShowMessage('Id: ' + dsItens.DataSet.FieldByName('Id').AsString +
-                  ', Name: ' + dsItens.DataSet.FieldByName('Name').AsString +
-                  ', Quantity: ' + dsItens.DataSet.FieldByName('Quantity').AsString);
+     MessageDlg('You want to finalize the sale now?', mtConfirmation, [mbYes, mbNo], 0);
+      if not QuestionAnswer = mrYes then
+        Exit;
 
-      dsItens.DataSet.Next;
+      OrderTotal := 0;
+      dsItens.DataSet.First;
+      while not dsItens.DataSet.Eof do
+      begin
+        OrderTotal := OrderTotal + dsItens.DataSet.FieldByName('total').AsCurrency;
+        dsItens.DataSet.Next;
+      end;
+
+      ConMinerva.TConMinerva.FDConnection1.StartTransaction;
+
+      DMOrders.qOrders.SQL.Text := 'INSERT INTO tb_orders(IdClient, Total)' +
+                              'VALUES(:IdClient, :Total)';
+      DMOrders.qOrders.ParamByName('IdClient').AsInteger := DMclients.dsClients.DataSet.FieldByName('Id').AsInteger;
+      DMOrders.qOrders.ParamByName('Total').AsFloat := OrderTotal;
+      DMOrders.qOrders.ExecSQL;
+
+      ConMinerva.TConMinerva.FDConnection1.Commit;
+      ConMinerva.TConMinerva.FDConnection1.StartTransaction;
+
+      DMOrders.qOrders.SQL.Text := 'SELECT TOP 1 * FROM tb_orders ORDER BY id DESC';
+      DMOrders.qOrders.Open;
+
+      if DMOrders.qOrders.IsEmpty then
+        IdOrder := 1
+      else
+        IdOrder := DMOrders.qOrders.FieldByName('id').AsInteger;
+
+      SQL := 'INSERT INTO tb_order_itens (IdOrder, IdProduct, Quantity, UnitPrice)  VALUES ';
+
+      dsItens.DataSet.First;
+      while not dsItens.DataSet.Eof do
+      begin
+        SQL := SQL + Format('(%d, %d, %s, %s), ', [
+          IdOrder,
+          dsItens.DataSet.FieldByName('Id').AsInteger,
+          dsItens.DataSet.FieldByName('Quantity').AsString.Replace(',', '.'),
+          dsItens.DataSet.FieldByName('Value').Asstring.Replace(',', '.')
+        ]);
+        dsItens.DataSet.Next;
+      end;
+
+      Delete(SQL, Length(SQL) - 1, 2);
+
+      DMOrders.qOrders.SQL.Text := SQL;
+      DMOrders.qOrders.ExecSQL;
+
+      ConMinerva.TConMinerva.FDConnection1.Commit;
+
+      dsItens.DataSet.First;
     end;
-    
-  end;
+    ShowMessage('Order save successfully!');
 
+    except on E: Exception do
+    begin
+      ConMinerva.TConMinerva.FDConnection1.Rollback;
+      ShowMessage('An error occurs during the process of saving data: ' + E.Message);
+    end;
+  end;
 end;
 
 procedure TformOrders.ClearFields;
 begin
   edtProduct.Text := '';
   edtQuantity.Text := '1';
-  DMOrders.qSearchProducts.EmptyDataSet;
+  DMOrders.qProducts.EmptyDataSet;
 
   if edtProduct.CanFocus then
     edtProduct.SetFocus;

@@ -1,15 +1,14 @@
 object DMclients: TDMclients
-  Height = 300
-  Width = 316
-  PixelsPerInch = 120
+  Height = 240
+  Width = 253
   object tbClients: TFDTable
     Active = True
     IndexFieldNames = 'id'
     Connection = TConMinerva.FDConnection1
     ResourceOptions.AssignedValues = [rvEscapeExpand]
     TableName = 'tb_clients'
-    Left = 56
-    Top = 33
+    Left = 45
+    Top = 26
     object tbClientsid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -43,7 +42,7 @@ object DMclients: TDMclients
   end
   object dsClients: TDataSource
     DataSet = tbClients
-    Left = 56
-    Top = 128
+    Left = 45
+    Top = 102
   end
 end

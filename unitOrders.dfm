@@ -50,14 +50,28 @@ object formOrders: TformOrders
         Expanded = False
         FieldName = 'name'
         Title.Caption = 'Name'
-        Width = 126
+        Width = 178
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'value'
+        Title.Caption = 'Value'
+        Width = 85
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'quantity'
         Title.Caption = 'Quantity'
-        Width = 81
+        Width = 93
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'total'
+        Title.Caption = 'Total'
+        Width = 88
         Visible = True
       end>
   end
@@ -166,8 +180,14 @@ object formOrders: TformOrders
     object memItensname: TStringField
       FieldName = 'name'
     end
+    object memItensvalue: TCurrencyField
+      FieldName = 'value'
+    end
     object memItensquantity: TFloatField
       FieldName = 'quantity'
+    end
+    object memItenstotal: TCurrencyField
+      FieldName = 'total'
     end
   end
 end
