@@ -1,6 +1,6 @@
 object DMProducts: TDMProducts
-  Height = 272
-  Width = 414
+  Height = 207
+  Width = 187
   object tbProduct: TFDTable
     Active = True
     IndexFieldNames = 'Id'
@@ -45,7 +45,7 @@ object DMProducts: TDMProducts
   end
   object dsProduct: TDataSource
     DataSet = tbProduct
-    Left = 147
-    Top = 32
+    Left = 51
+    Top = 112
   end
 end

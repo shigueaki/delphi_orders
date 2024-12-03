@@ -15,6 +15,8 @@ object TConMinerva: TTConMinerva
       'DriverID=MSSQL')
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
+    Connected = True
+    LoginPrompt = False
     Left = 51
     Top = 26
   end

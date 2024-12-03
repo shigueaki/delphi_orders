@@ -12,15 +12,15 @@ type
   TDMOrders = class(TDataModule)
     qProducts: TFDQuery;
     dsProducts: TDataSource;
+    qOrders: TFDQuery;
+    dsOrders: TDataSource;
+    qOrdersId: TFDAutoIncField;
     qProductsId: TFDAutoIncField;
     qProductsName: TStringField;
     qProductsDescription: TStringField;
     qProductsPrice: TFMTBCDField;
     qProductsAllowFractionate: TBooleanField;
     qProductsActive: TBooleanField;
-    qOrders: TFDQuery;
-    dsOrders: TDataSource;
-    qOrdersId: TFDAutoIncField;
   private
     { Private declarations }
   public

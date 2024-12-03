@@ -56,7 +56,8 @@
     <Transaction>2024/12/02 22:50:31.000.351,=C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\Minerva Orders\Unit1.pas</Transaction>
     <Transaction>2024/12/02 22:50:48.000.358,C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\Minerva Orders\Unit1.pas=C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\Minerva Orders\unitDMOrders.pas</Transaction>
     <Transaction>2024/12/02 22:50:48.000.358,C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\Minerva Orders\Unit1.dfm=C:\Users\supor\OneDrive\Documents\Embarcadero\Studio\Projects\Minerva Orders\unitDMOrders.dfm</Transaction>
-  </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="ConMinerva.pas"/>
     <File Path="ConMinerva.dfm"/>
     <File Path="Global.pas"/>

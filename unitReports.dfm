@@ -234,11 +234,9 @@ object formReports: TformReports
     end
   end
   object tbOrders: TFDTable
-    Active = True
-    IndexFieldNames = 'Id'
     Connection = TConMinerva.FDConnection1
     ResourceOptions.AssignedValues = [rvEscapeExpand]
-    TableName = 'minerva.dbo.tb_orders'
+    TableName = 'tb_orders'
     Left = 464
     Top = 24
     object tbOrdersId: TFDAutoIncField
@@ -264,11 +262,9 @@ object formReports: TformReports
     end
   end
   object tbItens: TFDTable
-    Active = True
-    IndexFieldNames = 'Id'
     Connection = TConMinerva.FDConnection1
     ResourceOptions.AssignedValues = [rvEscapeExpand]
-    TableName = 'minerva.dbo.tb_order_itens'
+    TableName = 'tb_order_itens'
     Left = 544
     Top = 32
     object tbItensId: TFDAutoIncField
@@ -319,19 +315,6 @@ object formReports: TformReports
     DataSetOptions = []
     Left = 464
     Top = 144
-    FieldDefs = <
-      item
-        FieldName = 'Id'
-      end
-      item
-        FieldName = 'IdClient'
-      end
-      item
-        FieldName = 'CreatedAt'
-      end
-      item
-        FieldName = 'Total'
-      end>
   end
   object cdsItens: TfrxDBDataset
     UserName = 'frxDBDataset1'
@@ -341,21 +324,5 @@ object formReports: TformReports
     DataSetOptions = []
     Left = 544
     Top = 160
-    FieldDefs = <
-      item
-        FieldName = 'Id'
-      end
-      item
-        FieldName = 'IdOrder'
-      end
-      item
-        FieldName = 'IdProduct'
-      end
-      item
-        FieldName = 'Quantity'
-      end
-      item
-        FieldName = 'UnitPrice'
-      end>
   end
 end

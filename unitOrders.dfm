@@ -165,6 +165,7 @@ object formOrders: TformOrders
     Top = 24
   end
   object memItens: TFDMemTable
+    Active = True
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]

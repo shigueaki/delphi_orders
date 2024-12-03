@@ -2,6 +2,7 @@ object DMOrders: TDMOrders
   Height = 289
   Width = 434
   object qProducts: TFDQuery
+    Active = True
     Connection = TConMinerva.FDConnection1
     SQL.Strings = (
       'SELECT * FROM tb_products'
