@@ -184,7 +184,7 @@ end;
 
 procedure TformClients.edtSearchClientChange(Sender: TObject);
 begin
-  DMClients.dsClients.DataSet.Filter := 'Name LIKE ' + QuotedStr('%' + edtSearchClient.Text + '%');
+  DMClients.dsClients.DataSet.Filter := 'Name LIKE ' + QuotedStr('%' + UpperCase(edtSearchClient.Text) + '%');
   DMClients.dsClients.DataSet.Filtered := True;
   FillFields;
 end;

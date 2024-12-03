@@ -28,16 +28,14 @@ uses
 type
   TformProducts = class(TForm)
     dbgRegisteredProducts: TDBGrid;
-    DBEdit1: TDBEdit;
-    Label1: TLabel;
-    Label2: TLabel;
-    DBMemo1: TDBMemo;
-    Label3: TLabel;
     DBCheckBox1: TDBCheckBox;
     DBCheckBox2: TDBCheckBox;
     edtSearchClient: TEdit;
-    DBEdit2: TDBEdit;
     DBNavigator1: TDBNavigator;
+    DBLabeledEdit1: TDBLabeledEdit;
+    DBMemo1: TDBMemo;
+    Label3: TLabel;
+    DBLabeledEdit2: TDBLabeledEdit;
   private
     { Private declarations }
   public

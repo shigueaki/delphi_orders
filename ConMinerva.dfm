@@ -1,8 +1,7 @@
 object TConMinerva: TTConMinerva
   OnCreate = DataModuleCreate
-  Height = 367
-  Width = 634
-  PixelsPerInch = 120
+  Height = 294
+  Width = 507
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=minerva'
@@ -17,7 +16,7 @@ object TConMinerva: TTConMinerva
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
     Connected = True
-    Left = 64
-    Top = 32
+    Left = 51
+    Top = 26
   end
 end

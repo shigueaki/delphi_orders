@@ -32,8 +32,8 @@ object formMain: TformMain
       'Reports'
       'Settings')
     OnChange = tabMainChange
-    ExplicitWidth = 148
-    ExplicitHeight = 0
+    ExplicitWidth = 463
+    ExplicitHeight = 310
     ClientRectBottom = 314
     ClientRectLeft = 4
     ClientRectRight = 461

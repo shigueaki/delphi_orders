@@ -11,7 +11,8 @@ uses
   ConMinerva in 'ConMinerva.pas' {TConMinerva: TDataModule},
   unitDMClients in 'unitDMClients.pas' {DMclients: TDataModule},
   unitDMProducts in 'unitDMProducts.pas' {DMProducts: TDataModule},
-  Global in 'Global.pas';
+  Global in 'Global.pas',
+  unitDMOrders in 'unitDMOrders.pas' {DMOrders: TDataModule};
 
 {$R *.res}
 
@@ -27,5 +28,6 @@ begin
   Application.CreateForm(TTConMinerva, TConMinerva);
   Application.CreateForm(TDMclients, DMclients);
   Application.CreateForm(TDMProducts, DMProducts);
+  Application.CreateForm(TDMOrders, DMOrders);
   Application.Run;
 end.
